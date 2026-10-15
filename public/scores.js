@@ -1,11 +1,11 @@
 // 랭킹 저장소: Supabase(무료 DB)의 scores 테이블을 REST로 직접 읽고 씀.
-// 공개 키(anon)는 브라우저에 노출돼도 되는 키. 쓰기 규칙(이름 길이, 개수 범위, 수정·삭제 금지)은 DB 쪽 supabase.sql에서 강제함.
-const URL_ = 'SUPABASE_URL';
-const KEY = 'SUPABASE_ANON_KEY';
+// 공개 키(publishable)는 브라우저에 노출돼도 되는 키. 쓰기 규칙(이름 길이, 개수 범위, 수정·삭제 금지)은 DB 쪽 supabase.sql에서 강제함.
+const URL_ = 'https://xpcahdbgyjxfurkxfazn.supabase.co';
+const KEY = 'sb_publishable__8XqO9Eu-Ci0beyvlfoFOw_VjzLQwHK';
 
 const api = (path, init = {}) => fetch(`${URL_}/rest/v1/${path}`, {
   ...init,
-  headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json', ...init.headers },
+  headers: { apikey: KEY, 'Content-Type': 'application/json', ...init.headers },
 });
 
 // 조건에 맞는 행 개수 (Content-Range: 0-0/57 의 뒤 숫자)
