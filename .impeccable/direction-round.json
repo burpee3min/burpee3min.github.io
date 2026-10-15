@@ -1,0 +1,129 @@
+{
+  "title": "첫 화면 디자인 방향 고르기",
+  "question": "주사위가 '체육관 인터벌 타이머'를 뽑았어요. 그대로 갈지, 다른 카드를 고를지, 다시 굴릴지 골라 주세요.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "체육관 인터벌 타이머",
+      "kicker": "THE ROLL",
+      "lineage": "크로스핏 박스 벽에 걸린 빨간 LED 인터벌 시계",
+      "thesis": "첫 화면 자체가 벽에 걸린 경기용 LED 시계: 3:00이 켜져 있고, 누르면 바로 카운트다운.",
+      "palette": ["#0b0b0c", "#ff2a1a", "#3a0d0a", "#f4f1ea"],
+      "materials": ["빨간 7세그먼트 LED", "검은 무광 아크릴 케이스", "고무 바닥 질감"],
+      "viewport": "화면 가득 LED 시계 패널: 위에 3:00, 아래에 000 카운트, 그 아래 큰 START 버튼, 바닥에 오늘의 1등 기록 한 줄.",
+      "risk": "검정 바탕 + 빛나는 한 가지 색은 AI가 흔히 만드는 피트니스 앱 느낌에 가까워질 수 있어요.",
+      "raised": [
+        {"from": "challenger-terminal", "raise": "READY·⭕·GO 같은 상태는 배지가 아니라 시계 화면에 직접 찍혀요."},
+        {"from": "challenger-kiln", "raise": "랭킹도 같은 크기 LED 숫자 한 줄씩, 순위는 숫자로만 보여줘요."},
+        {"from": "challenger-azulejo", "raise": "모든 배치가 LED 도트 격자 칸에 딱 맞게 정렬돼요."},
+        {"from": "challenger-zine", "raise": "강조는 오직 숫자 크기로만, 장식은 없어요."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "인생네컷 포토부스",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "한국 즉석사진 부스의 네 컷 사진 띠",
+      "thesis": "버피 3분이 한 장의 네컷 사진 띠가 되는 챌린지: 찍고, 뽑고, 올리는 재미.",
+      "palette": ["#ff4f8b", "#fff6e9", "#1d1d1f", "#ffd23f"],
+      "materials": ["유광 인화지 띠", "부스 커튼", "날짜 스탬프"],
+      "viewport": "세로 네컷 띠가 화면 중앙: 1컷 준비 ⭕, 2컷 버피 중, 3컷 숫자, 4컷은 '당신 차례' 빈칸 + START.",
+      "risk": "한국 공유 문화에선 친숙한 만큼 흔하게 느껴질 수 있고, 운동의 땀 느낌은 약해요."
+    },
+    {
+      "id": "challenger-arcade",
+      "label": "오락실 하이스코어",
+      "verdict": "competitive",
+      "lineage": "오락실 기계 위 빛나는 간판과 하이스코어 화면",
+      "thesis": "버피가 오락실 게임: INSERT COIN 대신 START, 끝나면 이니셜 세 글자로 하이스코어 등록.",
+      "palette": ["#07060d", "#19e3ff", "#ff2bd6", "#ffb200"],
+      "materials": ["백라이트 간판", "에어브러시 옆면 그림", "도트 점수 글씨"],
+      "viewport": "빛나는 게임 간판 로고, 가운데 데모 화면이 돌아가고, 아래 HIGH SCORE TOP 5와 깜빡이는 PRESS START.",
+      "case": "재미·릴스 감성은 앞서지만, 운동 기록의 신뢰감은 시계 쪽이 더 분명해요.",
+      "risk": "레트로 게임 흉내로 보이면 유치해질 수 있어요.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-arcade-marquee-row-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/pop-culture-shelf-arcade-marquee-row.webp"
+    },
+    {
+      "id": "challenger-minihompy",
+      "label": "싸이월드 미니홈피",
+      "verdict": "competitive",
+      "lineage": "싸이월드 미니룸과 방명록, 투데이 카운터",
+      "thesis": "내 미니룸에서 버피하는 미니미, 투데이 대신 오늘의 버피 수, 방명록이 랭킹.",
+      "palette": ["#ff8ab3", "#cfe8ff", "#fff8d6", "#6b4f3a"],
+      "materials": ["파스텔 아이소메트릭 방", "스티커 가구", "도토리"],
+      "viewport": "아이소메트릭 미니룸 안 미니미, 옆에 TODAY 버피 카운터와 방명록식 랭킹, START 버튼은 방문 버튼.",
+      "case": "30대 이상 한국 사용자에겐 강하게 통하지만, 무엇을 하는 서비스인지는 덜 바로 보여요.",
+      "risk": "어린 사용자에겐 낯설고, 향수 의존이 커요.",
+      "hero": "https://impeccable.style/worlds/cards/cyworld-minihompy-room-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/cyworld-minihompy-room.webp"
+    },
+    {
+      "id": "challenger-terminal",
+      "label": "초록 단말기 화면",
+      "verdict": "declined",
+      "lineage": "한밤 기계실의 초록 형광 단말기",
+      "thesis": "명령어 대화로 진행되는 챌린지.",
+      "palette": ["#020a03", "#39ff6a"],
+      "materials": ["형광 잔상", "곡면 유리"],
+      "viewport": "깜빡이는 커서 한 줄씩 출력되는 안내.",
+      "case": "운동하는 사람들과 연결이 약하고 서비스가 바로 이해되지 않아요.",
+      "kept": "상태를 장식이 아니라 화면에 직접 찍는 방식.",
+      "risk": "해커 흉내로 보여요.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-phosphor-terminal-midnight-hero.webp"
+    },
+    {
+      "id": "challenger-kiln",
+      "label": "도자기 유약 선반",
+      "verdict": "declined",
+      "lineage": "가마 선반 위 흘러내린 유약 잔",
+      "thesis": "기록이 유약처럼 흘러내리는 화면.",
+      "palette": ["#f2efe8", "#1f4fbf"],
+      "materials": ["유약", "가마 선반"],
+      "viewport": "선반 위 컵 한 줄.",
+      "case": "운동과 연결이 없고 서비스가 안 보여요.",
+      "kept": "한 줄로 같은 크기로 비교하는 질서.",
+      "risk": "운동 앱으로 안 읽혀요.",
+      "hero": "https://impeccable.style/worlds/cards/clay-ceramics-fracture-glaze-river-shelf-hero.webp"
+    },
+    {
+      "id": "challenger-azulejo",
+      "label": "포르투갈 타일 벽",
+      "verdict": "declined",
+      "lineage": "역사 벽면의 코발트 타일 그림",
+      "thesis": "타일 벽화로 그린 챌린지.",
+      "palette": ["#f6f3ea", "#1c3f9e"],
+      "materials": ["주석 유약 타일", "줄눈"],
+      "viewport": "타일 격자 위 벽화.",
+      "case": "사용자와 연결이 없고 서비스가 불분명해요.",
+      "kept": "모든 배치를 격자 칸 단위로 맞추는 규율.",
+      "risk": "관광 기념품처럼 보여요.",
+      "hero": "https://impeccable.style/worlds/cards/architecture-places-azulejo-station-hall-hero.webp"
+    },
+    {
+      "id": "challenger-zine",
+      "label": "복사집 진(zine)",
+      "verdict": "declined",
+      "lineage": "색지에 복사한 독립 잡지",
+      "thesis": "복사기로 확대한 글씨로 만든 챌린지 전단.",
+      "palette": ["#f2b81c", "#111111"],
+      "materials": ["색 복사지", "뭉개진 타자 글씨"],
+      "viewport": "색지 한 장에 타자 글씨 한 단.",
+      "case": "공유 감성은 있지만 운동·카메라 서비스로 안 읽혀요.",
+      "kept": "위계를 크기 하나로만 만드는 절제.",
+      "risk": "읽기 어려워요.",
+      "hero": "https://impeccable.style/worlds/cards/rw-copy-shop-zine-interior-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "canon": true,
+  "canonCard": {
+    "label": "흔한 운동 앱 첫 화면",
+    "thesis": "운동하는 사람 사진 위에 큰 제목과 시작 버튼, 그 아래 설명 카드들.",
+    "palette": ["#111111", "#ffffff", "#ff5a1f"],
+    "materials": ["운동 사진", "깔끔한 카드"],
+    "viewport": "사진 배경 + 굵은 제목 + 시작 버튼 + 기능 카드 3개.",
+    "risk": "다른 운동 앱과 구별이 안 돼요."
+  },
+  "steer": true
+}

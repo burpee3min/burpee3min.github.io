@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-15T15:58:12.317558+00:00",
+  "title": "Design System: 버피 3분 챌린지",
+  "extensions": {
+    "colorMeta": {
+      "led": {
+        "role": "primary",
+        "displayName": "Signal Red",
+        "canonical": "oklch(64% 0.245 31)",
+        "tonalRamp": [
+          "oklch(15% 0.107 31)",
+          "oklch(25% 0.138 31)",
+          "oklch(35% 0.168 31)",
+          "oklch(45% 0.199 31)",
+          "oklch(55% 0.23 31)",
+          "oklch(65% 0.23 31)",
+          "oklch(80% 0.184 31)",
+          "oklch(95% 0.138 31)"
+        ]
+      },
+      "led-dim": {
+        "role": "primary",
+        "displayName": "Unlit Segment",
+        "canonical": "rgba(255,42,26,.09)",
+        "tonalRamp": [
+          "oklch(15% 0.107 31)",
+          "oklch(25% 0.138 31)",
+          "oklch(35% 0.168 31)",
+          "oklch(45% 0.199 31)",
+          "oklch(55% 0.23 31)",
+          "oklch(65% 0.23 31)",
+          "oklch(80% 0.184 31)",
+          "oklch(95% 0.138 31)"
+        ]
+      },
+      "push-red": {
+        "role": "primary",
+        "displayName": "Push-Button Red",
+        "canonical": "oklch(48% 0.19 32)",
+        "tonalRamp": [
+          "oklch(15% 0.083 32)",
+          "oklch(25% 0.107 32)",
+          "oklch(35% 0.131 32)",
+          "oklch(45% 0.154 32)",
+          "oklch(55% 0.178 32)",
+          "oklch(65% 0.178 32)",
+          "oklch(80% 0.143 32)",
+          "oklch(95% 0.107 32)"
+        ]
+      },
+      "push-red-hover": {
+        "role": "primary",
+        "displayName": "Push-Button Red, Hover",
+        "canonical": "oklch(52% 0.2 32)",
+        "tonalRamp": [
+          "oklch(15% 0.088 32)",
+          "oklch(25% 0.113 32)",
+          "oklch(35% 0.138 32)",
+          "oklch(45% 0.163 32)",
+          "oklch(55% 0.188 32)",
+          "oklch(65% 0.188 32)",
+          "oklch(80% 0.15 32)",
+          "oklch(95% 0.113 32)"
+        ]
+      },
+      "push-red-pressed": {
+        "role": "primary",
+        "displayName": "Push-Button Red, Pressed",
+        "canonical": "oklch(57% 0.22 32)",
+        "tonalRamp": [
+          "oklch(15% 0.096 32)",
+          "oklch(25% 0.124 32)",
+          "oklch(35% 0.151 32)",
+          "oklch(45% 0.179 32)",
+          "oklch(55% 0.206 32)",
+          "oklch(65% 0.206 32)",
+          "oklch(80% 0.165 32)",
+          "oklch(95% 0.124 32)"
+        ]
+      },
+      "rubber-floor": {
+        "role": "neutral",
+        "displayName": "Rubber Floor",
+        "canonical": "oklch(19% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0.0 0)",
+          "oklch(25% 0.0 0)",
+          "oklch(35% 0.0 0)",
+          "oklch(45% 0.0 0)",
+          "oklch(55% 0.0 0)",
+          "oklch(65% 0.0 0)",
+          "oklch(80% 0.0 0)",
+          "oklch(95% 0.0 0)"
+        ]
+      },
+      "case-black": {
+        "role": "neutral",
+        "displayName": "Case Black",
+        "canonical": "oklch(12% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0.0 0)",
+          "oklch(25% 0.0 0)",
+          "oklch(35% 0.0 0)",
+          "oklch(45% 0.0 0)",
+          "oklch(55% 0.0 0)",
+          "oklch(65% 0.0 0)",
+          "oklch(80% 0.0 0)",
+          "oklch(95% 0.0 0)"
+        ]
+      },
+      "panel-black": {
+        "role": "neutral",
+        "displayName": "Panel Black",
+        "canonical": "oklch(13% 0.012 25)",
+        "tonalRamp": [
+          "oklch(15% 0.005 25)",
+          "oklch(25% 0.007 25)",
+          "oklch(35% 0.008 25)",
+          "oklch(45% 0.01 25)",
+          "oklch(55% 0.011 25)",
+          "oklch(65% 0.011 25)",
+          "oklch(80% 0.009 25)",
+          "oklch(95% 0.007 25)"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "oklch(95% 0.01 85)",
+        "tonalRamp": [
+          "oklch(15% 0.005 85)",
+          "oklch(25% 0.007 85)",
+          "oklch(35% 0.008 85)",
+          "oklch(45% 0.01 85)",
+          "oklch(55% 0.011 85)",
+          "oklch(65% 0.011 85)",
+          "oklch(80% 0.009 85)",
+          "oklch(95% 0.007 85)"
+        ]
+      },
+      "case-print": {
+        "role": "neutral",
+        "displayName": "Case Print",
+        "canonical": "oklch(81% 0.015 80)",
+        "tonalRamp": [
+          "oklch(15% 0.007 80)",
+          "oklch(25% 0.008 80)",
+          "oklch(35% 0.01 80)",
+          "oklch(45% 0.012 80)",
+          "oklch(55% 0.014 80)",
+          "oklch(65% 0.014 80)",
+          "oklch(80% 0.011 80)",
+          "oklch(95% 0.008 80)"
+        ]
+      },
+      "worn-print": {
+        "role": "neutral",
+        "displayName": "Worn Print",
+        "canonical": "oklch(70% 0.02 80)",
+        "tonalRamp": [
+          "oklch(15% 0.009 80)",
+          "oklch(25% 0.011 80)",
+          "oklch(35% 0.014 80)",
+          "oklch(45% 0.016 80)",
+          "oklch(55% 0.019 80)",
+          "oklch(65% 0.019 80)",
+          "oklch(80% 0.015 80)",
+          "oklch(95% 0.011 80)"
+        ]
+      },
+      "key-cap": {
+        "role": "neutral",
+        "displayName": "Key Cap",
+        "canonical": "oklch(21% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0.0 0)",
+          "oklch(25% 0.0 0)",
+          "oklch(35% 0.0 0)",
+          "oklch(45% 0.0 0)",
+          "oklch(55% 0.0 0)",
+          "oklch(65% 0.0 0)",
+          "oklch(80% 0.0 0)",
+          "oklch(95% 0.0 0)"
+        ]
+      },
+      "key-cap-hover": {
+        "role": "neutral",
+        "displayName": "Key Cap, Hover / Screw",
+        "canonical": "oklch(24% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0.0 0)",
+          "oklch(25% 0.0 0)",
+          "oklch(35% 0.0 0)",
+          "oklch(45% 0.0 0)",
+          "oklch(55% 0.0 0)",
+          "oklch(65% 0.0 0)",
+          "oklch(80% 0.0 0)",
+          "oklch(95% 0.0 0)"
+        ]
+      },
+      "key-cap-lit": {
+        "role": "neutral",
+        "displayName": "Lit Key",
+        "canonical": "oklch(16% 0.025 25)",
+        "tonalRamp": [
+          "oklch(15% 0.013 25)",
+          "oklch(25% 0.017 25)",
+          "oklch(35% 0.019 25)",
+          "oklch(45% 0.022 25)",
+          "oklch(55% 0.025 25)",
+          "oklch(65% 0.025 25)",
+          "oklch(80% 0.021 25)",
+          "oklch(95% 0.017 25)"
+        ]
+      },
+      "indicator-off": {
+        "role": "primary",
+        "displayName": "Indicator Off",
+        "canonical": "oklch(20% 0.05 30)",
+        "tonalRamp": [
+          "oklch(15% 0.027 30)",
+          "oklch(25% 0.033 30)",
+          "oklch(35% 0.039 30)",
+          "oklch(45% 0.045 30)",
+          "oklch(55% 0.051 30)",
+          "oklch(65% 0.051 30)",
+          "oklch(80% 0.042 30)",
+          "oklch(95% 0.033 30)"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder",
+        "canonical": "oklch(61% 0.015 75)",
+        "tonalRamp": [
+          "oklch(15% 0.007 75)",
+          "oklch(25% 0.008 75)",
+          "oklch(35% 0.01 75)",
+          "oklch(45% 0.011 75)",
+          "oklch(55% 0.013 75)",
+          "oklch(65% 0.013 75)",
+          "oklch(80% 0.01 75)",
+          "oklch(95% 0.008 75)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Intro clock time."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Intro REPS readout."
+      },
+      "status": {
+        "displayName": "Status",
+        "purpose": "WAIT / READY / HOLD / SET n / GO / STOP / TIME and setup MODE, lit on the display."
+      },
+      "led-row": {
+        "displayName": "Led Row",
+        "purpose": "Rank and count in every LED row list, all identical."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Name printed on the case top."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "One-sentence hook under the clock."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "How-to steps and plain copy."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Section headings and form labels."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Case print beside a readout (STATUS, REPS, TIME, MODE, RANK, DEMO)."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "The one red push button per screen."
+      },
+      "huge": {
+        "displayName": "Huge",
+        "purpose": "Solo play REPS and result reps; largest number in the system."
+      },
+      "rank-big": {
+        "displayName": "Rank Big",
+        "purpose": "Rank after registering, unpadded."
+      },
+      "mid": {
+        "displayName": "Mid",
+        "purpose": "Secondary readouts (setup TIME, rank total), narrowed per context."
+      },
+      "member": {
+        "displayName": "Member",
+        "purpose": "Per-person two-digit counts during team play."
+      },
+      "time-s": {
+        "displayName": "Time Small",
+        "purpose": "Play TIME, kept small so reps dominate."
+      },
+      "key-digit": {
+        "displayName": "Key Digit",
+        "purpose": "Numbers on setup keys."
+      },
+      "note": {
+        "displayName": "Note",
+        "purpose": "Rules under a choice, practice notes."
+      },
+      "key": {
+        "displayName": "Key",
+        "purpose": "Hardware key labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "case-lift",
+        "value": "0 2px 0 rgba(255,255,255,.06) inset, 0 24px 48px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5)",
+        "purpose": "Clock body lifted off the floor."
+      },
+      {
+        "name": "panel-recess",
+        "value": "0 0 0 1px #000 inset, 0 6px 18px rgba(0,0,0,.9) inset",
+        "purpose": "Display windows and the play HUD sunk into the case."
+      },
+      {
+        "name": "board-recess",
+        "value": "0 0 0 1px #000 inset, 0 4px 14px rgba(0,0,0,.8) inset",
+        "purpose": "LED row lists (leaderboards, team breakdown)."
+      },
+      {
+        "name": "button-proud",
+        "value": "0 10px 24px rgba(0,0,0,.5), 0 3px 8px rgba(0,0,0,.5)",
+        "purpose": "START at rest."
+      },
+      {
+        "name": "button-pressed",
+        "value": "0 0 0 1px rgba(255,120,100,.5) inset, 0 4px 10px rgba(0,0,0,.5)",
+        "purpose": "START pressed."
+      },
+      {
+        "name": "led-glow",
+        "value": "0 0 6px rgba(255,42,26,.55), 0 0 22px rgba(255,42,26,.28)",
+        "purpose": "text-shadow on every lit segment."
+      },
+      {
+        "name": "key-proud",
+        "value": "0 1px 0 rgba(255,255,255,.05) inset, 0 6px 14px rgba(0,0,0,.5), 0 2px 4px rgba(0,0,0,.5)",
+        "purpose": "Hardware key at rest."
+      },
+      {
+        "name": "key-pressed",
+        "value": "0 0 0 1px rgba(255,42,26,.35) inset, 0 2px 6px rgba(0,0,0,.6)",
+        "purpose": "Selected key (aria-pressed), dropped 1px."
+      },
+      {
+        "name": "input-recess",
+        "value": "0 0 0 1px #000 inset, 0 4px 12px rgba(0,0,0,.8) inset",
+        "purpose": "Name field."
+      },
+      {
+        "name": "stage",
+        "value": "0 0 0 1px #000, 0 20px 40px rgba(0,0,0,.6)",
+        "purpose": "Camera window."
+      },
+      {
+        "name": "indicator-glow",
+        "value": "0 0 6px rgba(255,42,26,.8)",
+        "purpose": "Lit indicator dot on keys and 'me' rows."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-snap",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Button and key press, rep tick."
+      },
+      {
+        "name": "press",
+        "value": "120ms",
+        "purpose": "Push button and key transform/background/shadow transition."
+      },
+      {
+        "name": "rep-tick",
+        "value": "500ms",
+        "purpose": "Brightness flash on every live count change (demo, play REPS, member readouts)."
+      },
+      {
+        "name": "press-hold",
+        "value": "450ms",
+        "purpose": "START stays pressed with GO lit before leaving the intro (0 under reduced motion)."
+      },
+      {
+        "name": "demo-step",
+        "value": "1000ms",
+        "purpose": "Attract-loop clock tick; disabled under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "700px",
+        "purpose": "Column narrows from 640px to 560px max."
+      }
+    ],
+    "fonts": [
+      {
+        "family": "DSEG7",
+        "source": "public/fonts/DSEG7Classic-Bold.woff2",
+        "license": "OFL",
+        "display": "block"
+      },
+      {
+        "family": "DSEG14",
+        "source": "public/fonts/DSEG14Classic-Bold.woff2",
+        "license": "OFL",
+        "display": "block"
+      },
+      {
+        "family": "Pretendard Variable",
+        "source": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+        "license": "OFL"
+      }
+    ],
+    "surfaces": {
+      "inWorld": [
+        "public/index.html #intro",
+        "#setup",
+        "#play",
+        "#result",
+        "#ranking",
+        "public/card.js (1080x1920 share card)"
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "Red Push Button",
+      "kind": "button",
+      "refersTo": "button-start",
+      "description": "The one physical red button per screen (START, 랭킹 등록, or share once registered).",
+      "html": "<button class=\"ds-start\">시작하기</button>",
+      "css": ".ds-start{display:block;width:100%;padding:20px 0;border:0;border-radius:16px;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:22px;font-weight:900;letter-spacing:.06em;color:#fff;background:#b01206;box-shadow:0 10px 24px rgba(0,0,0,.5),0 3px 8px rgba(0,0,0,.5);cursor:pointer;transition:transform .12s cubic-bezier(.16,1,.3,1),background-color .12s,box-shadow .12s}.ds-start:hover{background:#c3160a}.ds-start:active{transform:translateY(2px);background:#e01e0e;box-shadow:0 0 0 1px rgba(255,120,100,.5) inset,0 4px 10px rgba(0,0,0,.5)}.ds-start:focus-visible{outline:2px solid #ff2a1a;outline-offset:3px}"
+    },
+    {
+      "name": "Indicator Key",
+      "kind": "button",
+      "refersTo": "button-key",
+      "description": "Setup hardware key: dark indicator dot and case-print digits until pressed, then lit dot and LED digits.",
+      "html": "<div class=\"ds-keys\"><button class=\"ds-key\" aria-pressed=\"true\"><span class=\"ds-seg\"><span class=\"ds-ghost\">8:88</span><span class=\"ds-lit\">3:00</span></span><small>공식</small></button><button class=\"ds-key\" aria-pressed=\"false\"><span class=\"ds-seg\"><span class=\"ds-ghost\">8:88</span><span class=\"ds-lit\">1:00</span></span><small>연습</small></button></div>",
+      "css": ".ds-keys{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.ds-key{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:64px;padding:24px 8px 12px;border:0;border-radius:12px;background:#1b1b1b;color:#f2eee6;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 6px 14px rgba(0,0,0,.5),0 2px 4px rgba(0,0,0,.5);transition:transform .12s cubic-bezier(.16,1,.3,1),box-shadow .12s,background-color .12s}.ds-key:hover{background:#222}.ds-key:active{transform:translateY(2px)}.ds-key:focus-visible{outline:2px solid #ff2a1a;outline-offset:3px}.ds-key::before{content:'';position:absolute;top:8px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#2a0b09}.ds-key[aria-pressed=true]{background:#160606;transform:translateY(1px);box-shadow:0 0 0 1px rgba(255,42,26,.35) inset,0 2px 6px rgba(0,0,0,.6)}.ds-key[aria-pressed=true]::before{background:#ff2a1a;box-shadow:0 0 6px rgba(255,42,26,.8)}.ds-key small{font-size:13px;color:#a9a296}.ds-seg{position:relative;display:inline-block;line-height:1;font-family:DSEG7,monospace;font-size:24px}.ds-ghost{color:rgba(255,42,26,.09)}.ds-lit{position:absolute;inset:0;text-align:right;color:#ff2a1a;text-shadow:0 0 6px rgba(255,42,26,.55),0 0 22px rgba(255,42,26,.28)}.ds-key:not([aria-pressed=true]) .ds-lit{color:#c9c2b6;text-shadow:none}.ds-key:not([aria-pressed=true]) .ds-ghost{color:transparent}"
+    },
+    {
+      "name": "Link Button",
+      "kind": "button",
+      "refersTo": "button-link",
+      "description": "Quiet underlined secondary action.",
+      "html": "<button class=\"ds-link\">전체 랭킹 보기</button>",
+      "css": ".ds-link{background:none;border:0;padding:16px;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:16px;font-weight:700;color:#a9a296;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(169,162,150,.4);cursor:pointer}.ds-link:hover{color:#f2eee6}.ds-link:focus-visible{outline:2px solid #ff2a1a;outline-offset:3px}"
+    },
+    {
+      "name": "Clock",
+      "kind": "custom",
+      "refersTo": "clock-case",
+      "description": "Signature: case with printed title and screws, recessed dot-grid LED panel; intro (time/STATUS/REPS), setup (TIME/MODE) and result (REPS huge + TIME status) variants.",
+      "html": "<div class=\"ds-clock\"><div class=\"ds-top\"><span class=\"ds-screw\"></span><b>버피 3분 챌린지</b><span class=\"ds-screw\"></span></div><div class=\"ds-panel\"><span class=\"ds-seg ds-time\"><span class=\"ds-ghost\">8:88</span><span class=\"ds-lit\">3:00</span></span><div class=\"ds-row\"><div><span class=\"ds-print\">STATUS</span><span class=\"ds-seg ds-s14\"><span class=\"ds-ghost\">~~~~~</span><span class=\"ds-lit\">READY</span></span></div><div><span class=\"ds-print\">REPS</span><span class=\"ds-seg ds-reps\"><span class=\"ds-ghost\">888</span><span class=\"ds-lit\">000</span></span></div></div></div></div>",
+      "css": ".ds-clock{background:linear-gradient(180deg,#161616,#080808 18%);border-radius:24px;padding:16px;box-shadow:0 2px 0 rgba(255,255,255,.06) inset,0 24px 48px rgba(0,0,0,.6),0 4px 10px rgba(0,0,0,.5);text-align:left}.ds-top{display:flex;justify-content:space-between;align-items:center;padding:0 8px 12px;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:24px;font-weight:900;letter-spacing:-.02em;color:#f2eee6}.ds-screw{width:10px;height:10px;border-radius:50%;background:#222;box-shadow:0 0 0 1px #000 inset}.ds-panel{border-radius:12px;padding:16px 16px 20px;background-color:#0c0404;background-image:radial-gradient(rgba(255,42,26,.07) 1px,transparent 1.4px);background-size:8px 8px;box-shadow:0 0 0 1px #000 inset,0 6px 18px rgba(0,0,0,.9) inset}.ds-seg{position:relative;display:inline-block;line-height:1;font-family:DSEG7,monospace}.ds-s14{font-family:DSEG14,monospace;font-size:28px}.ds-ghost{color:rgba(255,42,26,.09)}.ds-lit{position:absolute;inset:0;text-align:right;color:#ff2a1a;text-shadow:0 0 6px rgba(255,42,26,.55),0 0 22px rgba(255,42,26,.28)}.ds-time{font-size:96px}.ds-reps{font-size:52px}.ds-row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px;gap:8px}.ds-print{display:block;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;color:#c9c2b6;margin-bottom:6px}"
+    },
+    {
+      "name": "Play HUD",
+      "kind": "card",
+      "refersTo": "play-hud",
+      "description": "Opaque LED panel under the camera: TIME + STATUS on top, REPS huge (solo) or per-member 2-digit readouts (team).",
+      "html": "<div class=\"ds-hud\"><div class=\"ds-top\"><div><span class=\"ds-print\">TIME</span><span class=\"ds-seg ds-t\"><span class=\"ds-ghost\">8:88</span><span class=\"ds-lit\">2:41</span></span></div><div><span class=\"ds-print\">STATUS</span><span class=\"ds-seg ds-s\"><span class=\"ds-ghost\">~~~~~</span><span class=\"ds-lit\">GO</span></span></div></div><div class=\"ds-m\"><span><b>1번</b><span class=\"ds-seg ds-n\"><span class=\"ds-ghost\">88</span><span class=\"ds-lit\">07</span></span></span><span><b>2번</b><span class=\"ds-seg ds-n\"><span class=\"ds-ghost\">88</span><span class=\"ds-lit\">05</span></span></span><span><b>3번</b><span class=\"ds-seg ds-n\"><span class=\"ds-ghost\">88</span><span class=\"ds-lit\">00</span></span></span></div></div>",
+      "css": ".ds-hud{padding:12px 16px 16px;border-radius:12px;background-color:#0c0404;background-image:radial-gradient(rgba(255,42,26,.07) 1px,transparent 1.4px);background-size:8px 8px;box-shadow:0 0 0 1px #000 inset,0 6px 18px rgba(0,0,0,.9) inset;text-align:left}.ds-top{display:flex;align-items:flex-end;justify-content:space-between}.ds-print{display:block;font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;color:#c9c2b6;margin-bottom:6px}.ds-seg{position:relative;display:inline-block;line-height:1;font-family:DSEG7,monospace}.ds-s{font-family:DSEG14,monospace;font-size:clamp(20px,6vw,32px)}.ds-t{font-size:clamp(28px,8vw,40px)}.ds-n{font-size:clamp(48px,14vw,72px)}.ds-ghost{color:rgba(255,42,26,.09)}.ds-lit{position:absolute;inset:0;text-align:right;color:#ff2a1a;text-shadow:0 0 6px rgba(255,42,26,.55),0 0 22px rgba(255,42,26,.28)}.ds-m{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px;margin-top:12px}.ds-m>span{display:flex;flex-direction:column;align-items:center;gap:4px}.ds-m b{font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:13px;font-weight:800;color:#c9c2b6}"
+    },
+    {
+      "name": "LED Rows",
+      "kind": "card",
+      "refersTo": "led-rows",
+      "description": "Shared row list (intro top-3, ranking, team breakdown): rank, name, count at one size; lit indicator dot marks your own entry.",
+      "html": "<ol class=\"ds-board\"><li class=\"ds-me\"><span class=\"ds-seg\"><span class=\"ds-ghost\">8</span><span class=\"ds-lit\">1</span></span><span class=\"ds-nm\">이름</span><span class=\"ds-seg\"><span class=\"ds-ghost\">888</span><span class=\"ds-lit\">072</span></span></li><li><span class=\"ds-seg\"><span class=\"ds-ghost\">8</span><span class=\"ds-lit\">2</span></span><span class=\"ds-nm\">이름</span><span class=\"ds-seg\"><span class=\"ds-ghost\">888</span><span class=\"ds-lit\">065</span></span></li></ol>",
+      "css": ".ds-board{list-style:none;margin:0;padding:8px 16px;border-radius:16px;background-color:#0c0404;background-image:radial-gradient(rgba(255,42,26,.06) 1px,transparent 1.4px);background-size:8px 8px;box-shadow:0 0 0 1px #000 inset,0 4px 14px rgba(0,0,0,.8) inset}.ds-board li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,42,26,.12)}.ds-board li:last-child{border-bottom:0}.ds-board .ds-seg{position:relative;display:inline-block;line-height:1;font-family:DSEG7,monospace;font-size:22px}.ds-board .ds-ghost{color:rgba(255,42,26,.09)}.ds-board .ds-lit{position:absolute;inset:0;text-align:right;color:#ff2a1a;text-shadow:0 0 6px rgba(255,42,26,.55),0 0 22px rgba(255,42,26,.28)}.ds-nm{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-weight:700;font-size:17px;color:#f2eee6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ds-board li.ds-me .ds-nm::before{content:'';display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:#ff2a1a;box-shadow:0 0 6px rgba(255,42,26,.8);vertical-align:middle}"
+    },
+    {
+      "name": "Name Input",
+      "kind": "input",
+      "refersTo": "input-name",
+      "description": "Recessed panel field for the ranking name.",
+      "html": "<input class=\"ds-input\" placeholder=\"이름 (20자까지)\">",
+      "css": ".ds-input{width:100%;padding:16px;border:0;border-radius:12px;background:#0c0404;color:#f2eee6;caret-color:#ff2a1a;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:17px;font-weight:700;box-shadow:0 0 0 1px #000 inset,0 4px 12px rgba(0,0,0,.8) inset}.ds-input::placeholder{color:#8a837a}.ds-input:focus-visible{outline:2px solid #ff2a1a;outline-offset:3px}"
+    },
+    {
+      "name": "How-to Step",
+      "kind": "custom",
+      "description": "48px red line pictogram beside one sentence of body text.",
+      "html": "<div class=\"ds-step\"><svg viewBox=\"0 0 48 48\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"17\" y=\"6\" width=\"14\" height=\"26\" rx=\"3\"/><path d=\"M22 10h4M24 32l-8 10M24 32l8 10M10 42h28\"/></svg><span>폰을 바닥에 세우고 뒤로 물러나 머리부터 발끝까지 보이게 서요.</span></div>",
+      "css": ".ds-step{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:center;padding:12px 8px;font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;font-size:16px;line-height:1.5;color:#f2eee6;text-align:left;word-break:keep-all}.ds-step svg{width:48px;height:48px;color:#ff2a1a}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Wall-Mounted Interval Clock",
+    "overview": "The product is the clock on the gym wall, not a page about a workout app. A matte black acrylic case hangs on a charcoal rubber floor; inside it, red seven-segment digits glow over their own dim unlit segments. Everything the visitor needs to know is either printed on the case in small white-grey caps or lit on the display. Settings are the timer's own hardware keys with indicator LEDs, and each screen has exactly one physical red push button.\n\nHierarchy comes from digit size alone: the biggest number on each screen is what that screen is about (the time on the intro, the reps during play and on the result, the rank once a score is registered); status is smaller, leaderboard rows are smallest and all identical. States (WAIT, READY, HOLD, SET 3, GO, STOP, TIME) are lit on the display, never drawn as badges. The world is dark, dense, and quiet except for the LED red, which is the only hue.\n\nEvery screen of `public/index.html` (intro, setup, play, result, ranking) and the 1080×1920 share card drawn by `public/card.js` are built in this world.",
+    "keyCharacteristics": [
+      "One hue: LED red on near-black. Warm off-white only for print and body copy.",
+      "Seven- and fourteen-segment digits with ghost segments behind every lit readout.",
+      "An 8px LED dot grid inside every display panel; all spacing in multiples of 8px.",
+      "Physical objects: a bevelled case with screws, recessed panels, hardware keys with indicator dots, a push button that travels 2px.",
+      "States printed on the display, rankings as same-size LED rows."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Red is light. It appears where something is lit or pressed, never as decoration, and no second accent hue exists.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ghost Segment Rule",
+        "body": "Every LED readout renders its full unlit pattern behind the lit value, so numbers never jump in width and the display reads as hardware.",
+        "section": "colors"
+      },
+      {
+        "name": "The Print-Until-Pressed Rule",
+        "body": "A key's digits are case print until the key is pressed; only then do they light as LED segments with their ghost behind.",
+        "section": "colors"
+      },
+      {
+        "name": "The Size-Only Rule",
+        "body": "Inside the display, rank is expressed only by digit size. Never by color, weight, or a badge.",
+        "section": "typography"
+      },
+      {
+        "name": "The Subject-Is-Biggest Rule",
+        "body": "On each screen the number the person came for is the largest readout: time on the intro, reps during play and on the result, rank once registered.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hardware Depth Rule",
+        "body": "Shadows describe a real object (case, recess, key, button, stage). No floating cards.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Red Button Rule",
+        "body": "Each screen has exactly one push-red button. On the result it is 랭킹 등록 while the score can still be saved; once saved, or for a practice or stopped run, the share button becomes the red one and everything else is a key or link.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** render every number as a segment readout with its ghost pattern behind it.",
+      "**Do** print states on the display (WAIT, READY, HOLD, SET n, GO, STOP, TIME) in DSEG14.",
+      "**Do** keep leaderboard rows identical in size; rank lives in the digit, \"me\" lives in the indicator dot.",
+      "**Do** build spacing from the 8px unit and put the dot grid inside display panels.",
+      "**Do** keep exactly one push-red button on each screen; everything else is a key or a link.",
+      "**Do** keep the camera stage clear for the full body and put readouts in the panel below it.",
+      "**Do** show per-person counts during team play and the team total only on the result.",
+      "**Do** stop the demo motion and the rep tick under `prefers-reduced-motion`."
+    ],
+    "donts": [
+      "**Don't** introduce a second accent hue.",
+      "**Don't** show states as badges or pills.",
+      "**Don't** use emoji as icons or labels; pictograms are inline SVG line drawings.",
+      "**Don't** cover the player with readouts on the video; only the message strip sits there.",
+      "**Don't** show invented counts, users, or records; only real ranking entries appear on a display."
+    ]
+  }
+}

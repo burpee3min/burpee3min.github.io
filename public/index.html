@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>버피 3분 챌린지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preload" href="fonts/DSEG7Classic-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family:'DSEG7'; src:url('fonts/DSEG7Classic-Bold.woff2') format('woff2'); font-display:block; }
+  @font-face { font-family:'DSEG14'; src:url('fonts/DSEG14Classic-Bold.woff2') format('woff2'); font-display:block; }
+  :root {
+    --bg:#131313; --fg:#f2eee6; --muted:#a9a296;
+    --led:#ff2a1a; --led-dim:rgba(255,42,26,.09); --led-glow:0 0 6px rgba(255,42,26,.55), 0 0 22px rgba(255,42,26,.28);
+    --case:#080808; --panel:#0c0404; --print:#c9c2b6;
+    --u:8px;
+  }
+  * { box-sizing:border-box; }
+  html { color-scheme:dark; accent-color:var(--led); scrollbar-color:#3a3a3a var(--bg); }
+  body {
+    margin:0; color:var(--fg); text-align:center; caret-color:var(--led);
+    font-family:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    /* 체육관 고무 바닥: 어두운 바탕에 작은 알갱이 */
+    background-color:var(--bg);
+    background-image:radial-gradient(rgba(255,255,255,.04) 1px, transparent 1.3px), radial-gradient(rgba(255,70,50,.06) 1px, transparent 1.3px);
+    background-size:7px 7px, 13px 13px; background-position:0 0, 3px 6px;
+  }
+  #intro { word-break:keep-all; }
+  ::selection { background:var(--led); color:#fff; }
+  :focus-visible { outline:2px solid var(--led); outline-offset:3px; }
+  main:has(#intro:not(.hidden), #setup:not(.hidden), #result:not(.hidden)) > h1 { display:none; }
+
+  /* ── 첫 화면: 벽걸이 LED 인터벌 시계 ── */
+  #intro { padding-top:calc(var(--u) * 2); }
+  .clock {
+    background:linear-gradient(180deg, #161616, var(--case) 18%);
+    border-radius:calc(var(--u) * 3); padding:calc(var(--u) * 2);
+    box-shadow:0 2px 0 rgba(255,255,255,.06) inset, 0 24px 48px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5);
+  }
+  .clock-top { display:flex; align-items:center; justify-content:space-between; padding:0 var(--u) calc(var(--u) * 1.5); }
+  .clock-top h1 { margin:0; font-size:clamp(20px, 5.4vw, 28px); font-weight:900; letter-spacing:-.02em; color:var(--fg); }
+  .screw { width:10px; height:10px; border-radius:50%; background:#222; box-shadow:0 0 0 1px #000 inset; flex:none; }
+  .panel {
+    position:relative; border-radius:calc(var(--u) * 1.5); padding:calc(var(--u) * 2) calc(var(--u) * 2) calc(var(--u) * 2.5);
+    background-color:var(--panel);
+    background-image:radial-gradient(rgba(255,42,26,.07) 1px, transparent 1.4px); background-size:var(--u) var(--u);
+    box-shadow:0 0 0 1px #000 inset, 0 6px 18px rgba(0,0,0,.9) inset;
+  }
+  .seg { position:relative; display:inline-block; line-height:1; font-family:'DSEG7', monospace; }
+  .seg14 { font-family:'DSEG14', monospace; }
+  .seg .ghost { color:var(--led-dim); }
+  .seg .lit { position:absolute; inset:0; color:var(--led); text-shadow:var(--led-glow); text-align:right; }
+  .seg.time { font-size:clamp(64px, 21vw, 124px); }
+  .panel-row { display:flex; align-items:flex-end; justify-content:space-between; margin-top:calc(var(--u) * 2); gap:var(--u); }
+  .readout { text-align:left; }
+  .print { display:block; font-size:11px; font-weight:700; letter-spacing:.2em; color:var(--print); margin-bottom:6px; }
+  .seg.status { font-size:clamp(20px, 6vw, 32px); }
+  .seg.reps { font-size:clamp(40px, 12vw, 64px); }
+  .lit.tick { animation:tick .5s cubic-bezier(.16,1,.3,1); }
+  @keyframes tick { from { filter:brightness(1.5); text-shadow:0 0 10px var(--led), 0 0 34px rgba(255,42,26,.6); } }
+  .demo-note { position:absolute; top:var(--u); right:calc(var(--u) * 1.5); font-size:11px; letter-spacing:.2em; color:rgba(201,194,182,.8); font-weight:700; }
+
+  .hook { font-size:clamp(17px, 4.4vw, 20px); font-weight:700; line-height:1.5; margin:calc(var(--u) * 3) 0 calc(var(--u) * 2); text-wrap:balance; }
+  .hook b { color:var(--led); font-weight:800; }
+  .start {
+    display:block; width:100%; margin:0; padding:calc(var(--u) * 2.5) 0; border-radius:calc(var(--u) * 2);
+    font-size:22px; font-weight:900; letter-spacing:.06em; color:#fff;
+    background:#b01206; box-shadow:0 10px 24px rgba(0,0,0,.5), 0 3px 8px rgba(0,0,0,.5);
+    transition:transform .12s cubic-bezier(.16,1,.3,1), background-color .12s, box-shadow .12s;
+  }
+  .start:hover { background:#c3160a; }
+  .start:active, .start.pressed { transform:translateY(2px); background:#e01e0e; box-shadow:0 0 0 1px rgba(255,120,100,.5) inset, 0 4px 10px rgba(0,0,0,.5); }
+  .linkish { background:none; color:var(--muted); font-size:16px; font-weight:700; padding:calc(var(--u) * 2); margin:var(--u) 0 0; text-decoration:underline; text-underline-offset:5px; text-decoration-color:rgba(169,162,150,.4); }
+  .linkish:hover { color:var(--fg); }
+
+  .board { margin-top:calc(var(--u) * 5); text-align:left; }
+  .board h2, .how h2 { font-size:14px; font-weight:800; letter-spacing:.06em; color:var(--print); margin:0 0 calc(var(--u) * 1.5) var(--u); }
+
+  .how { margin:calc(var(--u) * 5) 0 calc(var(--u) * 4); text-align:left; }
+  .how ul { list-style:none; margin:0; padding:0; }
+  .how li { display:grid; grid-template-columns:48px 1fr; gap:calc(var(--u) * 2); align-items:center; padding:calc(var(--u) * 1.5) var(--u); border:0; font-size:16px; line-height:1.5; }
+  .how svg { width:48px; height:48px; color:var(--led); }
+  main { max-width:640px; margin:0 auto; padding:16px; }
+  @media (min-width:700px) { main { max-width:560px; } }
+  @media (prefers-reduced-motion:reduce) { .start, .key, .lit.tick { transition:none; animation:none; } }
+  .hidden { display:none !important; }
+  button { font:inherit; color:var(--fg); border:0; cursor:pointer; margin:0; }
+  main > section:not(#intro) { word-break:keep-all; padding-top:var(--u); }
+
+  /* 화면 제목: 시계 케이스 윗면에 찍힌 글씨 */
+  main > h1 { margin:calc(var(--u) * 1.5) 0 calc(var(--u) * 2); font-size:20px; font-weight:900; letter-spacing:-.02em; }
+  .sec { font-size:14px; font-weight:800; letter-spacing:.06em; color:var(--print); text-align:left; margin:calc(var(--u) * 4) 0 calc(var(--u) * 1.5) var(--u); }
+  .note { color:var(--muted); font-size:15px; line-height:1.6; margin:calc(var(--u) * 1.5) var(--u) 0; text-align:left; }
+
+  /* 작은 LED 표시창 (설정·결과·플레이 공용) */
+  .mini { display:flex; align-items:flex-end; justify-content:space-between; gap:var(--u); }
+  .seg.mid { font-size:clamp(44px, 14vw, 72px); }
+  .seg.small { font-size:22px; }
+  .seg.huge { font-size:clamp(88px, 28vw, 152px); }
+
+  /* 설정 키: 인터벌 타이머 본체의 버튼. 선택되면 위쪽 LED 점이 켜짐 */
+  .choices { display:grid; grid-template-columns:repeat(auto-fit, minmax(88px, 1fr)); gap:var(--u); }
+  .key {
+    position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    min-height:64px; padding:calc(var(--u) * 2) var(--u) calc(var(--u) * 1.5); border-radius:calc(var(--u) * 1.5);
+    background:#1b1b1b; color:var(--fg); font-size:16px; font-weight:700;
+    box-shadow:0 1px 0 rgba(255,255,255,.05) inset, 0 6px 14px rgba(0,0,0,.5), 0 2px 4px rgba(0,0,0,.5);
+    transition:transform .12s cubic-bezier(.16,1,.3,1), box-shadow .12s, background-color .12s;
+  }
+  .key:hover { background:#222; }
+  .key:active { transform:translateY(2px); box-shadow:0 2px 6px rgba(0,0,0,.6); }
+  .choices .key::before { content:''; position:absolute; top:8px; left:50%; width:6px; height:6px; margin-left:-3px; border-radius:50%; background:#2a0b09; }
+  .choices .key[aria-pressed="true"] { background:#160606; box-shadow:0 0 0 1px rgba(255,42,26,.35) inset, 0 2px 6px rgba(0,0,0,.6); transform:translateY(1px); }
+  .choices .key[aria-pressed="true"]::before { background:var(--led); box-shadow:0 0 6px rgba(255,42,26,.8); }
+  .key .seg { font-size:24px; }
+  .choices .key { padding-top:calc(var(--u) * 3); }
+  /* 안 눌린 키의 숫자는 케이스에 인쇄된 글씨, 눌리면 LED로 켜짐 */
+  .key:not([aria-pressed="true"]) .seg .lit { color:var(--print); text-shadow:none; }
+  .key:not([aria-pressed="true"]) .seg .ghost { color:transparent; }
+  .key svg { width:28px; height:28px; color:var(--print); }
+  .key[aria-pressed="true"] svg { color:var(--led); }
+  .key small { font-size:13px; color:var(--muted); font-weight:700; }
+  /* 시작 버튼은 항상 첫 화면 안에 보이게 아래에 고정 */
+  .actions { position:sticky; bottom:0; margin-top:calc(var(--u) * 3); padding:calc(var(--u) * 2) 0 var(--u); background:linear-gradient(to bottom, rgba(19,19,19,0), var(--bg) 28%); }
+  #setup .sec { margin-top:calc(var(--u) * 3); }
+  #setup .choices .key { min-height:56px; padding:calc(var(--u) * 2.5) var(--u) var(--u); }
+  #setup .seg.mid { font-size:clamp(40px, 12vw, 60px); }
+  #sizeChoice { grid-template-columns:repeat(5, 1fr); }
+  .actions .key { width:100%; margin-top:var(--u); }
+
+  /* 플레이: 카메라 위 표시창 */
+  /* 카메라는 전신이 보이도록 가리지 않고, 표시창은 카메라 아래 별도 LED 패널 */
+  #stage { position:relative; height:min(44vh, calc((100vw - 32px) * 4 / 3)); max-width:100%; aspect-ratio:3/4; margin:0 auto; background:#000; border-radius:calc(var(--u) * 2); overflow:hidden; box-shadow:0 0 0 1px #000, 0 20px 40px rgba(0,0,0,.6); }
+  video, canvas { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scaleX(-1); }
+  #overlay { position:absolute; inset:0; padding:var(--u); pointer-events:none; }
+  #msg { background:rgba(8,8,8,.86); border-radius:var(--u); padding:var(--u) calc(var(--u) * 1.5); font-size:15px; font-weight:700; line-height:1.4; word-break:keep-all; }
+  .hud { margin-top:calc(var(--u) * 1.5); padding:calc(var(--u) * 1.5) calc(var(--u) * 2) calc(var(--u) * 2); text-align:left; }
+  .hud-top { display:flex; align-items:flex-end; justify-content:space-between; }
+  .seg.time-s { font-size:clamp(28px, 8vw, 40px); }
+  #countBox { text-align:center; margin-top:var(--u); }
+  #countBox .print { text-align:left; }
+  #members { display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--u) calc(var(--u) * 2); margin-top:calc(var(--u) * 1.5); }
+  #members:empty { display:none; }
+  #members span.m { display:flex; flex-direction:column; align-items:center; gap:4px; font-size:13px; font-weight:800; color:var(--print); }
+  #members .seg { font-size:clamp(48px, 14vw, 72px); }
+  #stopBtn { margin-top:calc(var(--u) * 2); width:100%; }
+
+  /* 결과 */
+  .result-case { margin-top:var(--u); }
+  .result-case .panel { text-align:center; }
+  .result-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:calc(var(--u) * 2); }
+  .result-top .print { margin:0; }
+  .result-top .status { font-size:20px; }
+  #resultTag { display:block; color:var(--print); font-size:15px; font-weight:700; margin-top:calc(var(--u) * 1.5); }
+  .ledrows { list-style:none; margin:0; padding:var(--u) calc(var(--u) * 2); border-radius:calc(var(--u) * 2); text-align:left; background-color:var(--panel);
+    background-image:radial-gradient(rgba(255,42,26,.06) 1px, transparent 1.4px); background-size:var(--u) var(--u); box-shadow:0 0 0 1px #000 inset, 0 4px 14px rgba(0,0,0,.8) inset; }
+  .ledrows li { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:calc(var(--u) * 2); padding:calc(var(--u) * 1.5) 0; border-bottom:1px solid rgba(255,42,26,.12); }
+  .ledrows li:last-child { border-bottom:0; }
+  .ledrows .nm { font-weight:700; font-size:17px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ledrows .nm small { color:var(--muted); font-weight:700; font-size:14px; margin-left:6px; }
+  .ledrows .seg { font-size:22px; }
+  .ledrows .empty { display:block; color:var(--muted); font-size:15px; line-height:1.6; }
+  .ledrows li.me .nm::before { content:''; display:inline-block; width:8px; height:8px; margin-right:8px; border-radius:50%; background:var(--led); box-shadow:0 0 6px rgba(255,42,26,.8); vertical-align:middle; }
+  #saveForm { display:grid; gap:var(--u); margin-top:calc(var(--u) * 3); }
+  #saveForm label { text-align:left; }
+  input { width:100%; padding:calc(var(--u) * 2); font:inherit; font-size:17px; font-weight:700; color:var(--fg); border:0; border-radius:calc(var(--u) * 1.5);
+    background:var(--panel); box-shadow:0 0 0 1px #000 inset, 0 4px 12px rgba(0,0,0,.8) inset; }
+  input::placeholder { color:#8a837a; }
+  #rankLine { margin-top:calc(var(--u) * 3); text-align:left; }
+  .seg.rank-big { font-size:clamp(64px, 20vw, 104px); }
+  #rankLine .seg.mid { font-size:clamp(32px, 9vw, 48px); }
+  .proof { margin:calc(var(--u) * 4) 0 calc(var(--u) * 2); }
+  #cardImg:not([src]) { display:none; }
+  #cardImg { width:62%; max-width:280px; border-radius:calc(var(--u) * 1.5); margin:0 auto; display:block; box-shadow:0 24px 48px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5); }
+  #result .start { margin-top:calc(var(--u) * 2); }
+</style>
+</head>
+<body>
+<main>
+  <h1>버피 3분 챌린지</h1>
+
+  <section id="intro">
+    <div class="clock">
+      <div class="clock-top"><span class="screw"></span><h1>버피 3분 챌린지</h1><span class="screw"></span></div>
+      <div class="panel" role="img" aria-label="3분 타이머와 버피 개수 시연 화면">
+        <span class="demo-note" id="demoNote">DEMO</span>
+        <span class="seg time"><span class="ghost" aria-hidden="true">8:88</span><span class="lit" id="demoTime">3:00</span></span>
+        <div class="panel-row">
+          <div class="readout"><span class="print">STATUS</span><span class="seg seg14 status"><span class="ghost" aria-hidden="true">~~~~~</span><span class="lit" id="demoStatus">READY</span></span></div>
+          <div class="readout"><span class="print">REPS</span><span class="seg reps"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="demoReps">000</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="hook">폰 카메라가 <b>3분 동안</b> 버피 개수를 세어 줘요.<br>당신의 기록은 몇 개?</p>
+    <button id="setupBtn" class="start">시작하기</button>
+    <button id="rankBtn" class="linkish">전체 랭킹 보기</button>
+
+    <section class="board" aria-labelledby="topTitle">
+      <h2 id="topTitle">개인 랭킹 TOP 3</h2>
+      <ol class="ledrows" id="topList"><li><span class="empty">불러오는 중…</span></li></ol>
+    </section>
+
+    <section class="how" aria-labelledby="howTitle">
+      <h2 id="howTitle">이렇게 해요</h2>
+      <ul>
+        <li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="17" y="6" width="14" height="26" rx="3"/><path d="M22 10h4M24 32l-8 10M24 32l8 10M10 42h28"/></svg><span>폰을 바닥에 세우고 뒤로 물러나 머리부터 발끝까지 보이게 서요.</span></li>
+        <li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="20" r="3.5"/><path d="M24 24v10M24 34l-5 10M24 34l5 10M20 27C11 21 13 5 24 5s13 16 4 22"/></svg><span>두 팔로 머리 위에 동그라미를 만들면 3초 뒤 출발해요.</span></li>
+        <li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="31" r="3.5"/><path d="M13 33l25 5M17 34v8M6 43h36M38 6v16M34 10l4-4 4 4M34 18l4 4 4-4"/></svg><span>머리가 바닥 가까이 내려갔다가 일어서면 1개. 3분 동안 최대한 많이!</span></li>
+      </ul>
+    </section>
+  </section>
+
+  <section id="setup" class="hidden">
+    <div class="clock">
+      <div class="clock-top"><span class="screw"></span><h1>버피 3분 챌린지</h1><span class="screw"></span></div>
+      <div class="panel mini" role="img" id="setDisplay" aria-label="선택한 시간 3분, 개인">
+        <div class="readout"><span class="print">TIME</span><span class="seg mid"><span class="ghost" aria-hidden="true">8:88</span><span class="lit" id="setTime">3:00</span></span></div>
+        <div class="readout"><span class="print">MODE</span><span class="seg seg14 status"><span class="ghost" aria-hidden="true">~~~~~</span><span class="lit" id="setMode">SOLO</span></span></div>
+      </div>
+    </div>
+
+    <h2 class="sec">누구랑 하나요?</h2>
+    <div class="choices" id="modeChoice">
+      <button class="key" data-v="solo" aria-pressed="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="9" r="4"/><path d="M8 28c0-5 3.5-9 8-9s8 4 8 9"/></svg>개인</button>
+      <button class="key" data-v="team" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="10" r="3.5"/><circle cx="22" cy="10" r="3.5"/><path d="M3 27c0-4.5 3.5-8 8-8 2.5 0 4.5 1 5.5 2.5M14 27c0-4.5 3.5-8 8-8s8 3.5 8 8"/></svg>팀</button>
+    </div>
+    <div id="sizeBox" class="hidden">
+      <h2 class="sec">몇 명이서 하나요?</h2>
+      <div class="choices" id="sizeChoice">
+        <button class="key" data-v="2" aria-pressed="true" aria-label="2명"><span class="seg"><span class="ghost" aria-hidden="true">8</span><span class="lit">2</span></span><small>명</small></button>
+        <button class="key" data-v="3" aria-pressed="false" aria-label="3명"><span class="seg"><span class="ghost" aria-hidden="true">8</span><span class="lit">3</span></span><small>명</small></button>
+        <button class="key" data-v="4" aria-pressed="false" aria-label="4명"><span class="seg"><span class="ghost" aria-hidden="true">8</span><span class="lit">4</span></span><small>명</small></button>
+        <button class="key" data-v="5" aria-pressed="false" aria-label="5명"><span class="seg"><span class="ghost" aria-hidden="true">8</span><span class="lit">5</span></span><small>명</small></button>
+        <button class="key" data-v="6" aria-pressed="false" aria-label="6명"><span class="seg"><span class="ghost" aria-hidden="true">8</span><span class="lit">6</span></span><small>명</small></button>
+      </div>
+      <p class="note">버피는 한 번에 한 명씩 이어서 하고, 팀원 모두 끝날 때까지 화면 안에 전신이 보여야 해요.</p>
+    </div>
+    <h2 class="sec">시간</h2>
+    <div class="choices" id="timeChoice">
+      <button class="key" data-v="180" aria-pressed="true" aria-label="공식 3분"><span class="seg"><span class="ghost" aria-hidden="true">8:88</span><span class="lit">3:00</span></span><small>공식</small></button>
+      <button class="key" data-v="60" aria-pressed="false" aria-label="연습 1분"><span class="seg"><span class="ghost" aria-hidden="true">8:88</span><span class="lit">1:00</span></span><small>연습</small></button>
+      <button class="key" data-v="120" aria-pressed="false" aria-label="연습 2분"><span class="seg"><span class="ghost" aria-hidden="true">8:88</span><span class="lit">2:00</span></span><small>연습</small></button>
+    </div>
+    <p class="note" id="timeNote">공식 3분 기록만 랭킹에 올라가요.</p>
+    <div class="actions">
+      <button id="startBtn" class="start">카메라 켜기</button>
+      <button class="linkish homeBtn">처음으로</button>
+    </div>
+  </section>
+
+  <section id="play" class="hidden">
+    <div id="stage">
+      <video id="video" playsinline muted></video>
+      <canvas id="canvas"></canvas>
+      <div id="overlay">
+        <div id="msg">모델 불러오는 중…</div>
+      </div>
+    </div>
+    <div class="panel hud">
+      <div class="hud-top">
+        <div class="readout"><span class="print">TIME</span><span class="seg time-s"><span class="ghost" aria-hidden="true">8:88</span><span class="lit" id="time">3:00</span></span></div>
+        <div class="readout"><span class="print">STATUS</span><span class="seg seg14 status"><span class="ghost" aria-hidden="true">~~~~~</span><span class="lit" id="playStatus">WAIT</span></span></div>
+      </div>
+      <div id="members"></div>
+      <div class="readout" id="countBox"><span class="print">REPS</span><span class="seg huge"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="count">000</span></span></div>
+    </div>
+    <button id="stopBtn" class="key">그만하기</button>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="clock result-case">
+      <div class="clock-top"><span class="screw"></span><h1>버피 3분 챌린지</h1><span class="screw"></span></div>
+      <div class="panel" role="img" id="bigBox" aria-label="기록">
+        <div class="result-top"><span class="print">REPS</span><span class="seg seg14 status"><span class="ghost" aria-hidden="true">~~~~</span><span class="lit">TIME</span></span></div>
+        <span class="seg huge"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="big">000</span></span>
+      </div>
+    </div>
+    <span id="resultTag"></span>
+    <ol class="ledrows hidden" id="memberResult" style="margin-top:calc(var(--u) * 3)"></ol>
+    <form id="saveForm">
+      <label class="sec" for="name" id="nameLabel" style="margin-top:calc(var(--u) * 3)">랭킹에 올릴 이름</label>
+      <input id="name" maxlength="20" placeholder="이름 (20자까지)" required>
+      <button class="start">랭킹 등록</button>
+    </form>
+    <p id="practiceNote" class="note" style="text-align:center">연습 기록은 랭킹에 등록되지 않아요.</p>
+    <div class="panel mini hidden" id="rankLine" role="img" aria-label="">
+      <div class="readout"><span class="print" id="rankLabel">RANK</span><span class="seg rank-big"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="rankNum">0</span></span></div>
+      <div class="readout"><span class="print" id="rankOf">OF</span><span class="seg mid"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="rankTotal">000</span></span></div>
+    </div>
+    <div class="proof">
+      <h2 class="sec">인증 사진</h2>
+      <img id="cardImg" alt="인증 사진 미리보기: 내 사진, 개수, 등수">
+      <button id="shareBtn" class="key" style="width:100%;margin-top:calc(var(--u) * 2)">인증 사진 공유</button>
+    </div>
+    <button id="viewRankBtn" class="key hidden" style="width:100%">랭킹 보기</button>
+    <button id="againBtn" class="linkish">다시 하기</button>
+  </section>
+
+  <section id="ranking" class="hidden">
+    <div class="choices" id="rankChoice">
+      <button class="key" data-v="solo" aria-pressed="true">개인</button>
+      <button class="key" data-v="team" aria-pressed="false">팀</button>
+    </div>
+    <h2 class="sec">공식 3분 랭킹</h2>
+    <ol class="ledrows" id="list"></ol>
+    <button class="linkish homeBtn">처음으로</button>
+  </section>
+</main>
+
+<script type="module">
+import { PoseLandmarker, FilesetResolver, DrawingUtils } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
+import { createCounter, isArmsO, assignLanes } from './counter.js';
+import { makeCard } from './card.js';
+import { getScores, saveScore } from './scores.js';
+
+const $ = (id) => document.getElementById(id);
+const show = (id) => ['intro','setup','play','result','ranking'].forEach(s => $(s).classList.toggle('hidden', s !== id));
+const video = $('video'), canvas = $('canvas'), ctx = canvas.getContext('2d');
+
+const cfg = { mode: 'solo', size: 2, secs: 180 };
+const people = () => (cfg.mode === 'team' ? cfg.size : 1);
+const official = () => cfg.secs === 180;
+
+let landmarker, stream, phase, missingSince = 0, lanes, holdSince = 0, countdownAt, endAt, lastTotal = 0, myId = null, rankMode = 'solo', snap = null, myRank = null, cardBlob = null;
+
+// 버튼 묶음을 라디오처럼
+function choice(id, onPick) {
+  $(id).onclick = (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    for (const x of $(id).children) x.setAttribute('aria-pressed', x === b);
+    onPick(b.dataset.v);
+  };
+}
+function syncSet() {
+  $('setTime').textContent = fmt(cfg.secs);
+  $('setMode').textContent = cfg.mode === 'team' ? 'TEAM' + cfg.size : 'SOLO';
+  $('setDisplay').setAttribute('aria-label', `선택한 시간 ${cfg.secs / 60}분, ${cfg.mode === 'team' ? `팀 ${cfg.size}명` : '개인'}`);
+}
+choice('modeChoice', v => { cfg.mode = v; $('sizeBox').classList.toggle('hidden', v !== 'team'); syncSet(); });
+choice('sizeChoice', v => { cfg.size = +v; syncSet(); });
+choice('timeChoice', v => { cfg.secs = +v; $('timeNote').textContent = official() ? '공식 3분 기록만 랭킹에 올라가요.' : '연습 기록은 랭킹에 올라가지 않아요.'; syncSet(); });
+choice('rankChoice', v => { rankMode = v; showRanking(); });
+
+async function loadModel() {
+  if (!landmarker) {
+    const files = await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+    landmarker = await PoseLandmarker.createFromOptions(files, {
+      baseOptions: {
+        modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',
+        delegate: 'GPU',
+      },
+      runningMode: 'VIDEO',
+      numPoses: people(),
+    });
+  } else {
+    await landmarker.setOptions({ numPoses: people() });
+  }
+}
+
+const fmt = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+const pad3 = (n) => String(n).padStart(3, '0');
+// LED 숫자 한 칸: 꺼진 칸(ghost) 위에 켜진 값
+function led(ghost, val, cls = '') {
+  const e = document.createElement('span'); e.className = 'seg ' + cls;
+  e.innerHTML = `<span class="ghost" aria-hidden="true">${ghost}</span><span class="lit"></span>`;
+  e.lastChild.textContent = val; return e;
+}
+// 랭킹·팀원 목록 한 줄: 순위 숫자 | 이름 | 개수
+function ledRow(rank, name, count, extra = '') {
+  const li = document.createElement('li');
+  const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = name;
+  if (extra) { const sm = document.createElement('small'); sm.textContent = extra; nm.append(sm); }
+  li.append(led(String(rank).replace(/./g, '8'), rank), nm, led('888', pad3(count)));
+  return li;
+}
+const setStatus = (t) => { $('playStatus').textContent = t; };
+
+async function start() {
+  show('play');
+  lanes = null; lastTotal = 0; missingSince = 0; snap = null;
+  $('count').textContent = '000';
+  $('countBox').classList.toggle('hidden', people() > 1);
+  $('members').textContent = '';
+  setStatus('WAIT');
+  $('time').textContent = fmt(cfg.secs);
+  $('msg').textContent = '카메라와 모델 준비 중…';
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640, height: 480 }, audio: false });
+    video.srcObject = stream;
+    await video.play();
+    await loadModel();
+  } catch (e) {
+    alert('카메라를 쓸 수 없어요: ' + e.message);
+    stopCamera(); show('setup'); return;
+  }
+  canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+  holdSince = 0;
+  phase = 'ready';
+  requestAnimationFrame(loop);
+}
+
+const vis = (p) => p && p.visibility > 0.6 && p.y > 0 && p.y < 1 && p.x > 0 && p.x < 1;
+// 머리 끝(코·눈)부터 발 끝(발목·발가락)까지 다 보이는지
+const fullBody = (lm) => [0, 2, 5, 27, 28, 31, 32].every(i => vis(lm[i]));
+const meanX = (lm) => lm.reduce((s, p) => s + p.x, 0) / lm.length;
+// 머리 높이: 코, 안 보이면 양 어깨 중간
+function headY(lm) {
+  if (lm[0].visibility > 0.5) return lm[0].y;
+  if (lm[11].visibility > 0.5 && lm[12].visibility > 0.5) return (lm[11].y + lm[12].y) / 2;
+  return null;
+}
+
+function loop(now) {
+  if (!phase) return;
+  const poses = landmarker.detectForVideo(video, now).landmarks;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const d = new DrawingUtils(ctx);
+  for (const lm of poses) {
+    d.drawConnectors(lm, PoseLandmarker.POSE_CONNECTIONS, { color: '#ff2a1a', lineWidth: 4 });
+    d.drawLandmarks(lm, { color: '#fff', radius: 3 });
+  }
+
+  if (phase === 'ready' || phase === 'countdown') {
+    const n = people();
+    const allIn = poses.length === n && poses.every(fullBody);
+    if (!allIn) {
+      phase = 'ready';
+      holdSince = 0;
+      setStatus('WAIT');
+      $('msg').textContent = poses.length === 0
+        ? (n > 1 ? `${n}명 모두 버피를 할 수 있는 충분한 공간에 서 주세요` : '버피를 할 수 있는 충분한 공간에 서 주세요')
+        : n > 1 ? `${n}명 모두 머리부터 발끝까지 보이게 서 주세요 (지금 ${poses.filter(fullBody).length}명)`
+        : '머리부터 발끝까지 화면에 다 보이게 뒤로 물러나 주세요';
+    } else if (phase === 'ready') {
+      // 누구든 두 팔로 머리 위 동그라미 자세를 1초 유지하면 시작
+      if (poses.some(isArmsO)) holdSince ||= now; else holdSince = 0;
+      const hold = holdSince ? Math.min(1, (now - holdSince) / 1000) : 0;
+      setStatus(hold ? 'HOLD' : 'READY');
+      $('msg').textContent = hold ? `좋아요, 그대로! (${Math.round(hold * 100)}%)` : '두 팔을 머리 위로 올려 동그라미를 만들어 주세요';
+      if (hold >= 1) { phase = 'countdown'; countdownAt = now; snap = takePhoto(); beep(660); }
+    } else {
+      const left = 3 - Math.floor((now - countdownAt) / 1000);
+      setStatus(left > 0 ? 'SET ' + left : 'GO');
+      $('msg').textContent = left > 0 ? `준비… ${left}` : '시작!';
+      if (left <= 0) {
+        // 화면(좌우반전)에서 왼쪽 사람이 1번
+        lanes = [...poses].sort((a, b) => meanX(b) - meanX(a)).map(lm => ({
+          x: meanX(lm),
+          // 배 높이: 어깨와 엉덩이 사이, 엉덩이 쪽으로 2/3 지점
+          counter: createCounter(lm[0].y, Math.max(lm[27].y, lm[28].y, lm[31].y, lm[32].y),
+            (lm[11].y + lm[12].y + 2 * (lm[23].y + lm[24].y)) / 6),
+        }));
+        endAt = now + cfg.secs * 1000;
+        phase = 'go';
+        beep(880);
+      }
+    }
+  } else if (phase === 'go') {
+    const match = assignLanes(lanes.map(l => l.x), poses.map(meanX));
+    // 팀은 모두 계속 화면 안에 있어야 함. 순간적으로 놓치는 건 1초까지 봐줌
+    if (poses.length >= lanes.length) missingSince = 0; else missingSince ||= now;
+    const missing = missingSince && now - missingSince > 1000;
+    const lows = lanes.filter(l => l.counter.low).length;
+    lanes.forEach((l, i) => {
+      const lm = poses[match[i]];
+      if (lm) l.x = meanX(lm);
+      // 한 번에 한 명만: 버피 도중 다른 사람 머리도 배 아래로 내려오면(앉기·쪼그리기 포함) 그 1개는 안 셈
+      const others = lows - (l.counter.low ? 1 : 0);
+      l.counter.update(lm ? headY(lm) : null, !missing && others === 0);
+    });
+    const total = lanes.reduce((s, l) => s + l.counter.count, 0);
+    if (total !== lastTotal) {
+      lastTotal = total; beep(660);
+      const c = $('count'); c.textContent = pad3(total); c.classList.remove('tick'); void c.offsetWidth; c.classList.add('tick');
+    }
+    if (lanes.length > 1) {
+      // 팀원별 숫자는 처음 한 번만 만들고, 바뀐 사람만 갱신하며 깜빡임
+      if ($('members').children.length !== lanes.length) $('members').replaceChildren(...lanes.map((l, i) => {
+        const m = document.createElement('span'); m.className = 'm'; m.append(`${i + 1}번`, led('88', '00')); return m;
+      }));
+      lanes.forEach((l, i) => {
+        const lit = $('members').children[i].querySelector('.lit'), v = String(l.counter.count).padStart(2, '0');
+        if (lit.textContent !== v) { lit.textContent = v; lit.classList.remove('tick'); void lit.offsetWidth; lit.classList.add('tick'); }
+      });
+    }
+    setStatus(missing || lows > 1 ? 'STOP' : 'GO');
+    $('msg').textContent = missing ? `팀원 ${lanes.length}명 모두 화면 안에 들어와 주세요. 지금은 세지 않아요.`
+      : lows > 1 ? '버피는 한 번에 한 명만! 나머지는 서서 기다려요. 지금은 세지 않아요.'
+      : lanes.length > 1 ? '한 명씩 이어서!' : lanes[0].counter.down ? '일어나세요!' : '내려가세요!';
+    const remain = Math.max(0, Math.ceil((endAt - now) / 1000));
+    $('time').textContent = fmt(remain);
+    if (remain === 0) return finish();
+  }
+  requestAnimationFrame(loop);
+}
+
+let audio;
+function beep(freq) {
+  try {
+    audio ||= new AudioContext();
+    const o = audio.createOscillator(), g = audio.createGain();
+    o.frequency.value = freq; o.connect(g); g.connect(audio.destination);
+    g.gain.setValueAtTime(0.2, audio.currentTime); g.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.15);
+    o.start(); o.stop(audio.currentTime + 0.15);
+  } catch {}
+}
+
+function stopCamera() {
+  phase = null;
+  stream?.getTracks().forEach(t => t.stop());
+}
+
+const total = () => (lanes ? lanes.reduce((s, l) => s + l.counter.count, 0) : 0);
+
+// 동그라미 자세 순간의 카메라 화면을 인증 사진으로 (화면처럼 좌우반전)
+function takePhoto() {
+  const c = document.createElement('canvas');
+  c.width = video.videoWidth; c.height = video.videoHeight;
+  const g = c.getContext('2d');
+  g.translate(c.width, 0); g.scale(-1, 1);
+  g.drawImage(video, 0, 0);
+  return c;
+}
+
+async function renderCard() {
+  const team = lanes && lanes.length > 1;
+  cardBlob = await makeCard({
+    photo: snap,
+    count: total(),
+    tag: $('resultTag').textContent,
+    rank: myRank ? { rank: myRank.rank, total: myRank.total, team } : null,
+    sub: [myRank?.name, team ? lanes.map((l, i) => `${i + 1}번 ${l.counter.count}`).join(' + ') : ''].filter(Boolean).join(' · '),
+  });
+  $('cardImg').src = URL.createObjectURL(cardBlob);
+}
+
+function finish(early = false) {
+  myRank = null;
+  $('rankLine').classList.add('hidden');
+  $('viewRankBtn').classList.add('hidden');
+  stopCamera();
+  beep(440);
+  $('big').textContent = pad3(total());
+  $('bigBox').setAttribute('aria-label', `기록 ${total()}개`);
+  const team = lanes && lanes.length > 1;
+  $('memberResult').classList.toggle('hidden', !team);
+  if (team) $('memberResult').replaceChildren(...lanes.map((l, i) => ledRow(i + 1, `${i + 1}번`, l.counter.count)));
+  $('resultTag').textContent = `${cfg.mode === 'team' ? `팀 ${cfg.size}명` : '개인'} · ${official() ? '공식 3분' : `연습 ${cfg.secs / 60}분`}${early ? ' · 중간 종료' : ''}`;
+  // 랭킹은 공식 3분을 끝까지 한 기록만
+  const canSave = official() && !early;
+  $('saveForm').classList.toggle('hidden', !canSave);
+  $('practiceNote').classList.toggle('hidden', canSave);
+  $('practiceNote').textContent = early ? '중간에 그만둔 기록은 랭킹에 등록되지 않아요.' : '연습 기록은 랭킹에 등록되지 않아요.';
+  $('nameLabel').textContent = cfg.mode === 'team' ? '랭킹에 올릴 팀 이름' : '랭킹에 올릴 이름';
+  // 한 화면에 빨간 버튼은 하나: 등록 전엔 '랭킹 등록', 아니면 '공유'
+  $('shareBtn').className = canSave ? 'key' : 'start';
+  try { $('name').value = localStorage.getItem('burpeeName.' + cfg.mode) || ''; } catch {}
+  show('result');
+  renderCard();
+}
+
+async function showRanking() {
+  show('ranking');
+  for (const b of $('rankChoice').children) b.setAttribute('aria-pressed', b.dataset.v === rankMode);
+  $('list').innerHTML = '<li><span class="empty">불러오는 중…</span></li>';
+  try {
+    const rows = await getScores(rankMode);
+    $('list').innerHTML = '';
+    if (!rows.length) $('list').innerHTML = '<li><span class="empty">아직 기록이 없어요. 첫 기록의 주인공이 되어 보세요.</span></li>';
+    rows.forEach((r, i) => {
+      const li = ledRow(i + 1, r.name, r.count, r.mode === 'team' ? `${r.size}명` : '');
+      if (r.id === myId) li.classList.add('me');
+      $('list').append(li);
+    });
+  } catch { $('list').innerHTML = '<li><span class="empty">랭킹을 불러오지 못했어요.</span></li>'; }
+}
+
+$('saveForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const name = $('name').value.trim();
+  let saved;
+  try { saved = await saveScore({ mode: cfg.mode, size: people(), name, count: total() }); }
+  catch { return alert('등록에 실패했어요. 잠시 후 다시 눌러 주세요.'); }
+  myId = saved.id;
+  myRank = { ...saved, name };
+  try { localStorage.setItem('burpeeName.' + cfg.mode, name); } catch {}
+  rankMode = cfg.mode;
+  $('saveForm').classList.add('hidden');
+  $('rankNum').textContent = saved.rank; $('rankTotal').textContent = saved.total;
+  $('rankLabel').textContent = cfg.mode === 'team' ? 'TEAM RANK' : 'RANK';
+  $('rankOf').textContent = cfg.mode === 'team' ? 'TEAMS' : 'PLAYERS';
+  $('rankLine').setAttribute('aria-label', `${saved.total}${cfg.mode === 'team' ? '팀' : '명'} 중 ${saved.rank}등`);
+  $('shareBtn').className = 'start';
+  $('rankLine').classList.remove('hidden');
+  $('viewRankBtn').classList.remove('hidden');
+  renderCard();
+};
+
+$('shareBtn').onclick = async () => {
+  const who = cfg.mode === 'team' ? `우리 팀(${cfg.size}명)이` : '제가';
+  const when = official() ? '버피 3분 챌린지에서' : `버피 ${cfg.secs / 60}분 연습에서`;
+  const text = `${who} ${when} ${total()}개 했어요! 도전해보세요`;
+  const url = location.origin + location.pathname;
+  const file = cardBlob && new File([cardBlob], 'burpee.png', { type: 'image/png' });
+  // 폰: 공유 창에서 인스타그램 선택. 사진 공유가 안 되는 곳(PC)은 사진 저장
+  if (file && navigator.canShare?.({ files: [file] })) {
+    try { await navigator.share({ files: [file], text: `${text}\n${url}` }); } catch {}
+  } else if (file) {
+    const a = document.createElement('a');
+    a.href = $('cardImg').src; a.download = 'burpee.png'; a.click();
+  } else if (navigator.share) {
+    try { await navigator.share({ title: '버피 3분 챌린지', text, url }); } catch {}
+  } else {
+    await navigator.clipboard.writeText(`${text}\n${url}`);
+    alert('공유 문구를 복사했어요!');
+  }
+};
+
+// 첫 화면 시계 시연: 시간이 줄고 개수가 오르는 걸 보여줌 (움직임 줄이기 설정이면 정지)
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let demoT = 180, demoN = 0;
+function demoTick() {
+  if ($('intro').classList.contains('hidden') || still) return;
+  demoT = demoT <= 0 ? 180 : demoT - 1;
+  if (demoT === 180) demoN = 0;
+  else if (demoT % 3 === 0) {
+    demoN++;
+    const r = $('demoReps'); r.classList.remove('tick'); void r.offsetWidth; r.classList.add('tick');
+  }
+  $('demoTime').textContent = fmt(demoT);
+  $('demoReps').textContent = String(demoN).padStart(3, '0');
+  $('demoStatus').textContent = demoT === 0 ? 'TIME' : 'GO';
+}
+setInterval(demoTick, 1000);
+
+async function loadTop() {
+  try {
+    const rows = await getScores('solo', 3);
+    $('topList').innerHTML = '';
+    if (!rows.length) { $('topList').innerHTML = '<li><span class="empty">아직 기록이 없어요. 첫 기록의 주인공이 되어 보세요.</span></li>'; return; }
+    rows.forEach((r, i) => $('topList').append(ledRow(i + 1, r.name, r.count)));
+  } catch { $('topList').innerHTML = '<li><span class="empty">랭킹을 불러오지 못했어요.</span></li>'; }
+}
+loadTop();
+
+// 시작 버튼: 눌린 느낌 + 시계에 READY 찍고 설정 화면으로
+$('setupBtn').onclick = () => {
+  $('setupBtn').classList.add('pressed');
+  $('demoTime').textContent = '3:00'; $('demoReps').textContent = '000'; $('demoStatus').textContent = 'GO';
+  setTimeout(() => { $('setupBtn').classList.remove('pressed'); demoT = 180; demoN = 0; show('setup'); }, still ? 0 : 450);
+};
+$('startBtn').onclick = start;
+$('againBtn').onclick = () => show('setup');
+$('stopBtn').onclick = () => (phase === 'go' ? finish(true) : (stopCamera(), show('setup')));
+$('rankBtn').onclick = showRanking;
+$('viewRankBtn').onclick = showRanking;
+document.querySelectorAll('.homeBtn').forEach(b => (b.onclick = () => { show('intro'); loadTop(); }));
+</script>
+</body>
+</html>
