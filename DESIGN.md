@@ -180,6 +180,8 @@ components:
 
 ## Overview
 
+> Note (2026-10-23): the ranking was removed (intro TOP 3, ranking screen, name entry, RANK panel, rank on the share card). Their sections below describe retired parts; the LED Rows component lives on only as the team breakdown on the result screen.
+
 **Creative North Star: "The Wall-Mounted Interval Clock"**
 
 The product is the clock on the gym wall, not a page about a workout app. A matte black acrylic case hangs on a charcoal rubber floor; inside it, red seven-segment digits glow over their own dim unlit segments. Everything the visitor needs to know is either printed on the case in small white-grey caps or lit on the display. Settings are the timer's own hardware keys with indicator LEDs, and each screen has exactly one physical red push button.

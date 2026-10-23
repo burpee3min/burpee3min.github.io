@@ -73,8 +73,7 @@
   .linkish { background:none; color:var(--muted); font-size:16px; font-weight:700; padding:calc(var(--u) * 2); margin:var(--u) 0 0; text-decoration:underline; text-underline-offset:5px; text-decoration-color:rgba(169,162,150,.4); }
   .linkish:hover { color:var(--fg); }
 
-  .board { margin-top:calc(var(--u) * 5); text-align:left; }
-  .board h2, .how h2 { font-size:14px; font-weight:800; letter-spacing:.06em; color:var(--print); margin:0 0 calc(var(--u) * 1.5) var(--u); }
+  .how h2 { font-size:14px; font-weight:800; letter-spacing:.06em; color:var(--print); margin:0 0 calc(var(--u) * 1.5) var(--u); }
 
   .how { margin:calc(var(--u) * 5) 0 calc(var(--u) * 4); text-align:left; }
   .how ul { list-style:none; margin:0; padding:0; }
@@ -157,18 +156,7 @@
   .ledrows li { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:calc(var(--u) * 2); padding:calc(var(--u) * 1.5) 0; border-bottom:1px solid rgba(255,42,26,.12); }
   .ledrows li:last-child { border-bottom:0; }
   .ledrows .nm { font-weight:700; font-size:17px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .ledrows .nm small { color:var(--muted); font-weight:700; font-size:14px; margin-left:6px; }
   .ledrows .seg { font-size:22px; }
-  .ledrows .empty { display:block; color:var(--muted); font-size:15px; line-height:1.6; }
-  .ledrows li.me .nm::before { content:''; display:inline-block; width:8px; height:8px; margin-right:8px; border-radius:50%; background:var(--led); box-shadow:0 0 6px rgba(255,42,26,.8); vertical-align:middle; }
-  #saveForm { display:grid; gap:var(--u); margin-top:calc(var(--u) * 3); }
-  #saveForm label { text-align:left; }
-  input { width:100%; padding:calc(var(--u) * 2); font:inherit; font-size:17px; font-weight:700; color:var(--fg); border:0; border-radius:calc(var(--u) * 1.5);
-    background:var(--panel); box-shadow:0 0 0 1px #000 inset, 0 4px 12px rgba(0,0,0,.8) inset; }
-  input::placeholder { color:#8a837a; }
-  #rankLine { margin-top:calc(var(--u) * 3); text-align:left; }
-  .seg.rank-big { font-size:clamp(64px, 20vw, 104px); }
-  #rankLine .seg.mid { font-size:clamp(32px, 9vw, 48px); }
   .proof { margin:calc(var(--u) * 4) 0 calc(var(--u) * 2); }
   #cardImg:not([src]) { display:none; }
   #cardImg { width:62%; max-width:280px; border-radius:calc(var(--u) * 1.5); margin:0 auto; display:block; box-shadow:0 24px 48px rgba(0,0,0,.6), 0 4px 10px rgba(0,0,0,.5); }
@@ -194,12 +182,6 @@
 
     <p class="hook">폰 카메라가 <b>3분 동안</b> 버피 개수를 세어 줘요.<br>당신의 기록은 몇 개?</p>
     <button id="setupBtn" class="start">시작하기</button>
-    <button id="rankBtn" class="linkish">전체 랭킹 보기</button>
-
-    <section class="board" aria-labelledby="topTitle">
-      <h2 id="topTitle">개인 랭킹 TOP 3</h2>
-      <ol class="ledrows" id="topList"><li><span class="empty">불러오는 중…</span></li></ol>
-    </section>
 
     <section class="how" aria-labelledby="howTitle">
       <h2 id="howTitle">이렇게 해요</h2>
@@ -242,7 +224,6 @@
       <button class="key" data-v="60" aria-pressed="false" aria-label="연습 1분"><span class="seg"><span class="ghost" aria-hidden="true">8:88</span><span class="lit">1:00</span></span><small>연습</small></button>
       <button class="key" data-v="120" aria-pressed="false" aria-label="연습 2분"><span class="seg"><span class="ghost" aria-hidden="true">8:88</span><span class="lit">2:00</span></span><small>연습</small></button>
     </div>
-    <p class="note" id="timeNote">공식 3분 기록만 랭킹에 올라가요.</p>
     <div class="actions">
       <button id="startBtn" class="start">카메라 켜기</button>
       <button class="linkish homeBtn">처음으로</button>
@@ -278,33 +259,12 @@
     </div>
     <span id="resultTag"></span>
     <ol class="ledrows hidden" id="memberResult" style="margin-top:calc(var(--u) * 3)"></ol>
-    <form id="saveForm">
-      <label class="sec" for="name" id="nameLabel" style="margin-top:calc(var(--u) * 3)">랭킹에 올릴 이름</label>
-      <input id="name" maxlength="20" placeholder="이름 (20자까지)" required>
-      <button class="start">랭킹 등록</button>
-    </form>
-    <p id="practiceNote" class="note" style="text-align:center">연습 기록은 랭킹에 등록되지 않아요.</p>
-    <div class="panel mini hidden" id="rankLine" role="img" aria-label="">
-      <div class="readout"><span class="print" id="rankLabel">RANK</span><span class="seg rank-big"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="rankNum">0</span></span></div>
-      <div class="readout"><span class="print" id="rankOf">OF</span><span class="seg mid"><span class="ghost" aria-hidden="true">888</span><span class="lit" id="rankTotal">000</span></span></div>
-    </div>
     <div class="proof">
       <h2 class="sec">인증 사진</h2>
-      <img id="cardImg" alt="인증 사진 미리보기: 내 사진, 개수, 등수">
-      <button id="shareBtn" class="key" style="width:100%;margin-top:calc(var(--u) * 2)">인증 사진 공유</button>
+      <img id="cardImg" alt="인증 사진 미리보기: 내 사진과 개수">
+      <button id="shareBtn" class="start" style="margin-top:calc(var(--u) * 2)">인증 사진 공유</button>
     </div>
-    <button id="viewRankBtn" class="key hidden" style="width:100%">랭킹 보기</button>
     <button id="againBtn" class="linkish">다시 하기</button>
-  </section>
-
-  <section id="ranking" class="hidden">
-    <div class="choices" id="rankChoice">
-      <button class="key" data-v="solo" aria-pressed="true">개인</button>
-      <button class="key" data-v="team" aria-pressed="false">팀</button>
-    </div>
-    <h2 class="sec">공식 3분 랭킹</h2>
-    <ol class="ledrows" id="list"></ol>
-    <button class="linkish homeBtn">처음으로</button>
   </section>
 </main>
 
@@ -312,17 +272,16 @@
 import { PoseLandmarker, FilesetResolver, DrawingUtils } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
 import { createCounter, isArmsO, assignLanes } from './counter.js';
 import { makeCard } from './card.js';
-import { getScores, saveScore } from './scores.js';
 
 const $ = (id) => document.getElementById(id);
-const show = (id) => ['intro','setup','play','result','ranking'].forEach(s => $(s).classList.toggle('hidden', s !== id));
+const show = (id) => ['intro','setup','play','result'].forEach(s => $(s).classList.toggle('hidden', s !== id));
 const video = $('video'), canvas = $('canvas'), ctx = canvas.getContext('2d');
 
 const cfg = { mode: 'solo', size: 2, secs: 180 };
 const people = () => (cfg.mode === 'team' ? cfg.size : 1);
 const official = () => cfg.secs === 180;
 
-let landmarker, stream, phase, missingSince = 0, lanes, holdSince = 0, countdownAt, endAt, lastTotal = 0, myId = null, rankMode = 'solo', snap = null, myRank = null, cardBlob = null;
+let landmarker, stream, phase, missingSince = 0, lanes, holdSince = 0, countdownAt, endAt, lastTotal = 0, snap = null, cardBlob = null;
 
 // 버튼 묶음을 라디오처럼
 function choice(id, onPick) {
@@ -339,8 +298,7 @@ function syncSet() {
 }
 choice('modeChoice', v => { cfg.mode = v; $('sizeBox').classList.toggle('hidden', v !== 'team'); syncSet(); });
 choice('sizeChoice', v => { cfg.size = +v; syncSet(); });
-choice('timeChoice', v => { cfg.secs = +v; $('timeNote').textContent = official() ? '공식 3분 기록만 랭킹에 올라가요.' : '연습 기록은 랭킹에 올라가지 않아요.'; syncSet(); });
-choice('rankChoice', v => { rankMode = v; showRanking(); });
+choice('timeChoice', v => { cfg.secs = +v; syncSet(); });
 
 async function loadModel() {
   if (!landmarker) {
@@ -366,7 +324,7 @@ function led(ghost, val, cls = '') {
   e.innerHTML = `<span class="ghost" aria-hidden="true">${ghost}</span><span class="lit"></span>`;
   e.lastChild.textContent = val; return e;
 }
-// 랭킹·팀원 목록 한 줄: 순위 숫자 | 이름 | 개수
+// 팀원 목록 한 줄: 번호 | 이름 | 개수
 function ledRow(rank, name, count, extra = '') {
   const li = document.createElement('li');
   const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = name;
@@ -529,16 +487,13 @@ async function renderCard() {
     photo: snap,
     count: total(),
     tag: $('resultTag').textContent,
-    rank: myRank ? { rank: myRank.rank, total: myRank.total, team } : null,
-    sub: [myRank?.name, team ? lanes.map((l, i) => `${i + 1}번 ${l.counter.count}`).join(' + ') : ''].filter(Boolean).join(' · '),
+    rank: null,
+    sub: team ? lanes.map((l, i) => `${i + 1}번 ${l.counter.count}`).join(' + ') : '',
   });
   $('cardImg').src = URL.createObjectURL(cardBlob);
 }
 
 function finish(early = false) {
-  myRank = null;
-  $('rankLine').classList.add('hidden');
-  $('viewRankBtn').classList.add('hidden');
   stopCamera();
   beep(440);
   $('big').textContent = pad3(total());
@@ -547,55 +502,9 @@ function finish(early = false) {
   $('memberResult').classList.toggle('hidden', !team);
   if (team) $('memberResult').replaceChildren(...lanes.map((l, i) => ledRow(i + 1, `${i + 1}번`, l.counter.count)));
   $('resultTag').textContent = `${cfg.mode === 'team' ? `팀 ${cfg.size}명` : '개인'} · ${official() ? '공식 3분' : `연습 ${cfg.secs / 60}분`}${early ? ' · 중간 종료' : ''}`;
-  // 랭킹은 공식 3분을 끝까지 한 기록만
-  const canSave = official() && !early;
-  $('saveForm').classList.toggle('hidden', !canSave);
-  $('practiceNote').classList.toggle('hidden', canSave);
-  $('practiceNote').textContent = early ? '중간에 그만둔 기록은 랭킹에 등록되지 않아요.' : '연습 기록은 랭킹에 등록되지 않아요.';
-  $('nameLabel').textContent = cfg.mode === 'team' ? '랭킹에 올릴 팀 이름' : '랭킹에 올릴 이름';
-  // 한 화면에 빨간 버튼은 하나: 등록 전엔 '랭킹 등록', 아니면 '공유'
-  $('shareBtn').className = canSave ? 'key' : 'start';
-  try { $('name').value = localStorage.getItem('burpeeName.' + cfg.mode) || ''; } catch {}
   show('result');
   renderCard();
 }
-
-async function showRanking() {
-  show('ranking');
-  for (const b of $('rankChoice').children) b.setAttribute('aria-pressed', b.dataset.v === rankMode);
-  $('list').innerHTML = '<li><span class="empty">불러오는 중…</span></li>';
-  try {
-    const rows = await getScores(rankMode);
-    $('list').innerHTML = '';
-    if (!rows.length) $('list').innerHTML = '<li><span class="empty">아직 기록이 없어요. 첫 기록의 주인공이 되어 보세요.</span></li>';
-    rows.forEach((r, i) => {
-      const li = ledRow(i + 1, r.name, r.count, r.mode === 'team' ? `${r.size}명` : '');
-      if (r.id === myId) li.classList.add('me');
-      $('list').append(li);
-    });
-  } catch { $('list').innerHTML = '<li><span class="empty">랭킹을 불러오지 못했어요.</span></li>'; }
-}
-
-$('saveForm').onsubmit = async (e) => {
-  e.preventDefault();
-  const name = $('name').value.trim();
-  let saved;
-  try { saved = await saveScore({ mode: cfg.mode, size: people(), name, count: total() }); }
-  catch { return alert('등록에 실패했어요. 잠시 후 다시 눌러 주세요.'); }
-  myId = saved.id;
-  myRank = { ...saved, name };
-  try { localStorage.setItem('burpeeName.' + cfg.mode, name); } catch {}
-  rankMode = cfg.mode;
-  $('saveForm').classList.add('hidden');
-  $('rankNum').textContent = saved.rank; $('rankTotal').textContent = saved.total;
-  $('rankLabel').textContent = cfg.mode === 'team' ? 'TEAM RANK' : 'RANK';
-  $('rankOf').textContent = cfg.mode === 'team' ? 'TEAMS' : 'PLAYERS';
-  $('rankLine').setAttribute('aria-label', `${saved.total}${cfg.mode === 'team' ? '팀' : '명'} 중 ${saved.rank}등`);
-  $('shareBtn').className = 'start';
-  $('rankLine').classList.remove('hidden');
-  $('viewRankBtn').classList.remove('hidden');
-  renderCard();
-};
 
 $('shareBtn').onclick = async () => {
   const who = cfg.mode === 'team' ? `우리 팀(${cfg.size}명)이` : '제가';
@@ -634,15 +543,6 @@ function demoTick() {
 }
 setInterval(demoTick, 1000);
 
-async function loadTop() {
-  try {
-    const rows = await getScores('solo', 3);
-    $('topList').innerHTML = '';
-    if (!rows.length) { $('topList').innerHTML = '<li><span class="empty">아직 기록이 없어요. 첫 기록의 주인공이 되어 보세요.</span></li>'; return; }
-    rows.forEach((r, i) => $('topList').append(ledRow(i + 1, r.name, r.count)));
-  } catch { $('topList').innerHTML = '<li><span class="empty">랭킹을 불러오지 못했어요.</span></li>'; }
-}
-loadTop();
 
 // 시작 버튼: 눌린 느낌 + 시계에 READY 찍고 설정 화면으로
 $('setupBtn').onclick = () => {
@@ -653,9 +553,7 @@ $('setupBtn').onclick = () => {
 $('startBtn').onclick = start;
 $('againBtn').onclick = () => show('setup');
 $('stopBtn').onclick = () => (phase === 'go' ? finish(true) : (stopCamera(), show('setup')));
-$('rankBtn').onclick = showRanking;
-$('viewRankBtn').onclick = showRanking;
-document.querySelectorAll('.homeBtn').forEach(b => (b.onclick = () => { show('intro'); loadTop(); }));
+document.querySelectorAll('.homeBtn').forEach(b => (b.onclick = () => show('intro')));
 </script>
 </body>
 </html>
